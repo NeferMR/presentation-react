@@ -35,7 +35,7 @@ function Resumen() {
 function TimelineItem(title, date, description) {
   return (
     <li className="flex gap-8 my-12 relative">
-      <i className="icon-briefcase text-2xl text-black cursor-pointer p-4 bg-[#274059] rounded-full text-center mt-4 relative z-10"></i>
+      <i className="icon-briefcase text-2xl text-white cursor-pointer p-4 bg-[#274059] rounded-full text-center mt-4 relative z-10"></i>
       <div className="flex flex-col gap-4">
         <h4>{title}</h4>
         <span className="font-bold text-[#a5a5a5]">{date}</span>
