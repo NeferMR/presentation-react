@@ -32,7 +32,6 @@ function Contacto() {
           placeholder="Mensaje"
           className="p-4 rounded-2xl border-none bg-[#f5f5f5] focus:outline-none"
         ></textarea>
-        <div className="g-recaptcha" data-sitekey="6LckCR0rAAAAADBHpa2UWoXaf_Dvwpz9DzQ-ywsd"></div>
         <button
           type="submit"
           className="p-4 rounded-2xl border-none bg-[#274059] text-white mb-16 hover:bg-[#416e9b]"
