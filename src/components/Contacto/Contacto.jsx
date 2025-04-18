@@ -34,7 +34,7 @@ function Contacto() {
         ></textarea>
         <button
           type="submit"
-          className="p-4 rounded-2xl border-none bg-[#274059] text-white mb-16 hover:bg-[#416e9b]"
+          className="p-4 rounded-2xl border-none bg-[#274059] text-white mb-20 hover:bg-[#416e9b]"
         >
           Enviar
         </button>
