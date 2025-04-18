@@ -36,7 +36,7 @@ function Footer() {
             diferentes tecnologías
           </h3>
           <div className="flex flex-col gap-4 my-6">
-            {techItem("HTML y CSS base", "https://html.com/")}
+            {techItem("HTML y CSS base", "https://nefermr.github.io/Presentation/")}
             {techItem("Vue", "https://www.w3schools.com/css/")}
             {techItem("Angular", "https://www.javascript.com/")}
           </div>

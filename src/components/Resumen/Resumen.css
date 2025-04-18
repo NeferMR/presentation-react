@@ -13,6 +13,7 @@ ul:before {
 @media (min-width: 1024px) {
   ul:before {
     left: 6.7rem;
+    top: 3rem;
   }
 }
 

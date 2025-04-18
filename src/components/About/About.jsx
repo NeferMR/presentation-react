@@ -23,14 +23,11 @@ function About() {
         </div>
 
         <div className="mx-auto bg-[#f5f5f5] lg:ml-16">
-          <h2 className="text-3xl font-bold mt-20 mb-4 pt-5 text-black lg: m-0 text-left">
+          <h2 className="text-3xl font-bold mt-20 mb-4 pt-5 text-black lg:m-0 text-left">
             ¡Hola!
           </h2>
-          <p>
-            Soy Nefer, un ingeniero de sistemas apasionado por la tecnología y
-            el desarrollo web. Me encanta crear soluciones innovadoras y
-            eficientes que impulsen el crecimiento y la eficiencia en las
-            empresas.
+          <p className="mt-4">
+          Soy Nefer, ingeniero de sistemas apasionado por la tecnología y el desarrollo de software. Me motiva crear soluciones innovadoras que mejoren la eficiencia de los procesos, y me destaco por ser proactivo, adaptable y con gran capacidad de aprendizaje. Disfruto trabajar en equipo, pero también me desenvuelvo muy bien de forma independiente. Me apasiona aprender constantemente y asumir nuevos desafíos que me permitan demostrar y fortalecer mis habilidades para construir soluciones cada vez más efectivas.
           </p>
           <div className="flex gap-4 mt-8">
             <Icono
