@@ -3,11 +3,11 @@ import "./Resumen.css";
 
 function Resumen() {
   return (
-    <section className="p-4 shadow-lg">
+    <section className="p-4 shadow-lg font-mono">
       <h2 className="text-3xl font-bold mt-20 mb-4 text-black text-center">
         Resumen
       </h2>
-      <ul className="list-none relative">
+      <ul className="list-none relative lg:py-4 lg:px-20 xl:py-4 xl:px-60">
         <h3 className="text-xl font-bold my-8 px-4 bg-[#cccccc] rounded-2xl text-black">
           EXPERIENCIA LABORAL
         </h3>

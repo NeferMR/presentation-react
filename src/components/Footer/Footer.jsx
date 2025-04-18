@@ -13,7 +13,7 @@ function Footer() {
 
   function footerText() {
     return (
-      <footer className="fixed bottom-0 left-0 right-0 bg-[#274059] text-white p-2 text-center z-50 transition-transform duration-300 ease-in-out">
+      <footer className="fixed bottom-0 left-0 right-0 bg-[#274059] text-white p-2 text-center z-50 transition-transform duration-300 ease-in-out font-mono">
         <div className="flex justify-center items-center gap-4">
           <p>Esta página está hecha con HTML y CSS Base</p>
           <button
@@ -29,7 +29,7 @@ function Footer() {
 
   function modal() {
     return (
-      <div className="flex fixed top-0 left-0 right-0 w-full h-full bg-black/70 z-50 justify-center items-center">
+      <div className="flex fixed top-0 left-0 right-0 w-full h-full bg-black/70 z-50 justify-center items-center font-mono">
         <div className="bg-white p-8 rounded-2xl max-w-[500px] w-[90%] text-center">
           <h3 className="text-[#274059] mb-6 text-xl">
             Esta página está hecha con HTML y CSS Base, pero puedes verla en

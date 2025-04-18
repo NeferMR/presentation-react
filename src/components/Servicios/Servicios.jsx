@@ -1,6 +1,6 @@
 function Servicios() {
   return (
-    <section className="bg-[#416e9b] p-4 pb-16 shadow-lg text-center">
+    <section className="bg-[#416e9b] p-4 pb-16 shadow-lg text-center font-mono lg:py-4 lg:px-20 xl:py-4 xl:px-60">
       <h2 className="text-white text-5xl font-bold mt-20 mb-4">Servicios</h2>
       <ul className="list-none flex flex-wrap justify-center gap-4 items-center w-full">
         {ServiciosItem({

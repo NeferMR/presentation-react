@@ -9,3 +9,15 @@ ul:before {
   top: 1.5rem;
   z-index: -1;
 }
+
+@media (min-width: 1024px) {
+  ul:before {
+    left: 6.7rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  ul:before {
+    left: 16.7rem;
+  }
+}

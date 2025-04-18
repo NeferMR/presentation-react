@@ -1,6 +1,6 @@
 function Contacto() {
   return (
-    <section className="bg-[#dbdbdba6] p-4 text-center">
+    <section className="bg-[#dbdbdba6] p-4 text-center font-mono">
       <h2 className="text-5xl font-bold  mt-20 mb-4">Contacto</h2>
       <form
         action="https://api.web3forms.com/submit"
@@ -34,7 +34,7 @@ function Contacto() {
         ></textarea>
         <button
           type="submit"
-          className="p-4 rounded-2xl border-none bg-[#274059] text-white mb-20 hover:bg-[#416e9b]"
+          className="p-4 rounded-2xl border-none bg-[#274059] text-white mb-20 hover:bg-[#416e9b] lg:mb-12"
         >
           Enviar
         </button>

@@ -1,18 +1,18 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
 function Skills() {
   useEffect(() => {
     const animateSkills = () => {
-      const skills = document.querySelectorAll('.skill-circle');
-      
-      skills.forEach(skill => {
-        const percentageElement = skill.querySelector('.skill-percentage');
+      const skills = document.querySelectorAll(".skill-circle");
+
+      skills.forEach((skill) => {
+        const percentageElement = skill.querySelector(".skill-percentage");
         const percentage = parseInt(percentageElement.textContent);
-        
-        skill.style.setProperty('--percentage', '0%');
-        
+
+        skill.style.setProperty("--percentage", "0%");
+
         setTimeout(() => {
-          skill.style.setProperty('--percentage', `${percentage}%`);
+          skill.style.setProperty("--percentage", `${percentage}%`);
         }, 100);
       });
     };
@@ -21,7 +21,7 @@ function Skills() {
   }, []);
 
   return (
-    <section className="bg-[#f5f5f5] p-4 text-center">
+    <section className="bg-[#f5f5f5] p-4 text-center font-mono lg:py-4 lg:px-20 xl:py-4 xl:px-60">
       <h2 className="text-5xl font-bold mt-20 mb-4">Habilidades</h2>
       <div className="flex justify-center gap-32 flex-wrap p-8">
         {Skillitem({ percentage: "90", name: "HTML-CSS-JS" })}
