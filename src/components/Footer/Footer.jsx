@@ -15,7 +15,7 @@ function Footer() {
     return (
       <footer className="fixed bottom-0 left-0 right-0 bg-[#274059] text-white p-2 text-center z-50 transition-transform duration-300 ease-in-out font-mono">
         <div className="flex justify-center items-center gap-4">
-          <p>Esta página está hecha con HTML y CSS Base</p>
+          <p>Esta página está hecha con React y Tailwind</p>
           <button
             className="bg-[#416e9b] text-white border-none py-2 px-4 rounded-lg cursor-pointer transition-colors duration-300 ease-in-out"
             onClick={handleModalOpen}
