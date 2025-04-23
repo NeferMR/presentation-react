@@ -14,11 +14,6 @@ function About() {
             {item("Estudios", "Ingeniero de Sistemas")}
             {item("Email", "nefermr5@gmail.com")}
             {item("Teléfono", "+57 300 466 7017")}
-            {item(
-              "Sitio Web",
-              "Portafolio (click)",
-              "https://nefermr.github.io/portafolio/"
-            )}
           </ul>
         </div>
 
