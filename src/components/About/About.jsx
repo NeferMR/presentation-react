@@ -31,12 +31,6 @@ function About() {
           </p>
           <div className="flex gap-4 mt-8">
             <Icono
-              link={"https://nefermr.github.io/portafolio/"}
-              icono={
-                "icon-earth text-2xl text-black cursor-pointer p-2 bg-[#4d4d4d] text-white"
-              }
-            />
-            <Icono
               link={"https://github.com/neferMR"}
               icono={
                 "icon-github text-2xl text-black cursor-pointer p-2 bg-[#4d4d4d] text-white"
