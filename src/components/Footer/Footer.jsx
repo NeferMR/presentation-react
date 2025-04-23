@@ -32,13 +32,11 @@ function Footer() {
       <div className="flex fixed top-0 left-0 right-0 w-full h-full bg-black/70 z-50 justify-center items-center font-mono">
         <div className="bg-white p-8 rounded-2xl max-w-[500px] w-[90%] text-center">
           <h3 className="text-[#274059] mb-6 text-xl">
-            Esta página está hecha con HTML y CSS Base, pero puedes verla en
+            Esta página está hecha con React y Tailwind, pero puedes verla en
             diferentes tecnologías
           </h3>
           <div className="flex flex-col gap-4 my-6">
             {techItem("HTML y CSS base", "https://nefermr.github.io/Presentation/")}
-            {techItem("Vue", "https://www.w3schools.com/css/")}
-            {techItem("Angular", "https://www.javascript.com/")}
           </div>
           <button
             className="bg-[#274059] text-white border-none py-3 px-6 rounded-lg cursor-pointer mt-4 transition-colors duration-300 ease-in-out hover:bg-[#416e9b]"
