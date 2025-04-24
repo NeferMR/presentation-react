@@ -37,6 +37,7 @@ function Footer() {
           </h3>
           <div className="flex flex-col gap-4 my-6">
             {techItem("HTML y CSS base", "https://nefermr.github.io/Presentation/")}
+            {techItem("Angular y Tailwind", "https://presentation-angular.vercel.app/")}
           </div>
           <button
             className="bg-[#274059] text-white border-none py-3 px-6 rounded-lg cursor-pointer mt-4 transition-colors duration-300 ease-in-out hover:bg-[#416e9b]"

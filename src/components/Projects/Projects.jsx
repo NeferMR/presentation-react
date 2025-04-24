@@ -24,8 +24,6 @@ export default function Projects() {
     const allStacks = projects.flatMap((item) => item.Stack);
     const uniqueStacks = Array.from(new Set(allStacks));
     setStacks(uniqueStacks);
-    console.log("Unique Technologies:", uniqueTechs);
-    console.log("Unique Stacks:", uniqueStacks);
   }, [projects]);
 
   const openModal = (project) => {
