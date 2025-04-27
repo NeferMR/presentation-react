@@ -9,7 +9,6 @@ export default function Projects() {
   const [selectedStack, setSelectedStack] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
 
-  // Llamado a la API usando useEffect
   useEffect(() => {
     fetch("https://mongodbapi.glitch.me/api/items")
       .then((res) => res.json())
@@ -68,23 +67,51 @@ export default function Projects() {
         </select>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-12">
-        {projects.map((proj) =>
-          (selectedTechnology &&
-            !proj.Tecnologia.includes(selectedTechnology)) ||
-          (selectedStack && proj.Stack !== selectedStack) ? null : (
-            <div
-              key={proj._id}
-              onClick={() => openModal(proj)}
-              className="cursor-pointer bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition"
-            >
-              <img
-                src={proj.Imagen}
-                alt={proj.Nombre}
-                className="rounded-lg mb-4"
-              />
-              <h3 className="text-lg font-semibold">{proj.Nombre}</h3>
-              <p className="text-gray-600">{proj.Descripción}</p>
+        {projects.length === 0 ? (
+          <div className="flex flex-col justify-center items-center">
+            <div className="relative">
+              <div className="h-32 w-32 border-8 border-[#416e9b] rounded-full border-t-8 border-t-blue-400 animate-spin"></div>
+
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
+                <span className="text-white font-medium">Cargando</span>
+              </div>
             </div>
+            <p className="text-white font-bold text-xl">
+              ¿Porque puede demorar tanto?
+            </p>
+            <p className="text-white">
+              Debido a que el Backend y la base de datos están alojados en
+              servicios gratuitos, la primera carga puede tomar tiempo
+            </p>
+          </div>
+        ) : (
+          projects.map((proj) =>
+            (selectedTechnology &&
+              !proj.Tecnologia.includes(selectedTechnology)) ||
+            (selectedStack && proj.Stack !== selectedStack) ? null : (
+              <div
+                key={proj._id}
+                onClick={() => openModal(proj)}
+                className="cursor-pointer bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition"
+              >
+                <img
+                  src={proj.Imagen}
+                  alt={proj.Nombre}
+                  className="rounded-lg mb-4"
+                />
+                <h3 className="text-lg font-semibold">{proj.Nombre}</h3>
+                <p className="text-gray-600 mb-3">{proj.Descripcion}</p>
+                {proj.Tecnologia.map((tech, index) => (
+                  <span
+                    key={index}
+                    className="inline-block bg-blue-100 text-blue-500 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full"
+                  >
+                    {tech}
+                  </span>
+                ))}
+                <p className="p-4 text-cyan-600 font-bold text-sm">Ver proyecto →</p>
+              </div>
+            )
           )
         )}
 
