@@ -68,7 +68,7 @@ export default function Projects() {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-12">
         {projects.length === 0 ? (
-          <div className="flex flex-col justify-center items-center">
+          <div className="flex flex-col justify-center items-center sm:col-span-2 lg:col-span-3">
             <div className="relative">
               <div className="h-32 w-32 border-8 border-[#416e9b] rounded-full border-t-8 border-t-blue-400 animate-spin"></div>
 
@@ -97,7 +97,7 @@ export default function Projects() {
                 <img
                   src={proj.Imagen}
                   alt={proj.Nombre}
-                  className="rounded-lg mb-4"
+                  className="rounded-lg mb-4 w-80 h-40 object-cover mx-auto"
                 />
                 <h3 className="text-lg font-semibold">{proj.Nombre}</h3>
                 <p className="text-gray-600 mb-3">{proj.Descripcion}</p>
@@ -140,7 +140,7 @@ export default function Projects() {
                 <img
                   src={selectedProject.Imagen}
                   alt={selectedProject.Nombre}
-                  className="mt-4 rounded"
+                  className="mt-4 rounded w-80 h-40 object-cover mx-auto"
                 />
               )}
               {selectedProject.Link ? (
