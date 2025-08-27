@@ -1,67 +1,41 @@
-import React from "react";
-import { useState } from "react";
+import React from 'react';
+import Icono from '../Icono/Icono';
 
 function Footer() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  function handleModalClose() {
-    setIsModalOpen(false);
-  }
-  function handleModalOpen() {
-    setIsModalOpen(true);
-  }
-
-  function footerText() {
-    return (
-      <footer className="fixed bottom-0 left-0 right-0 bg-[#274059] text-white p-2 text-center z-50 transition-transform duration-300 ease-in-out font-mono">
-        <div className="flex justify-center items-center gap-4">
-          <p>Esta página está hecha con React y Tailwind</p>
-          <button
-            className="bg-[#416e9b] text-white border-none py-2 px-4 rounded-lg cursor-pointer transition-colors duration-300 ease-in-out"
-            onClick={handleModalOpen}
-          >
-            Saber más
-          </button>
+  return (
+    <footer className="bg-[#274059] text-white py-12 px-4 text-center">
+      <div className="max-w-6xl mx-auto">
+        <div className="mb-6">
+          <h3 className="text-2xl font-bold mb-4">Nefer Medina</h3>
+          <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
+            Ingeniero de Sistemas apasionado por crear soluciones innovadoras y efectivas.
+            Siempre dispuesto a nuevos desafíos y oportunidades de aprendizaje.
+          </p>
         </div>
-      </footer>
-    );
-  }
-
-  function modal() {
-    return (
-      <div className="flex fixed top-0 left-0 right-0 w-full h-full bg-black/70 z-50 justify-center items-center font-mono">
-        <div className="bg-white p-8 rounded-2xl max-w-[500px] w-[90%] text-center">
-          <h3 className="text-[#274059] mb-6 text-xl">
-            Esta página está hecha con React y Tailwind, pero puedes verla en
-            diferentes tecnologías
-          </h3>
-          <div className="flex flex-col gap-4 my-6">
-            {techItem("HTML y CSS base", "https://nefermr.github.io/Presentation/")}
-            {techItem("Angular y Tailwind", "https://presentation-angular.vercel.app/")}
-          </div>
-          <button
-            className="bg-[#274059] text-white border-none py-3 px-6 rounded-lg cursor-pointer mt-4 transition-colors duration-300 ease-in-out hover:bg-[#416e9b]"
-            onClick={handleModalClose}
-          >
-            Cerrar
-          </button>
+        
+        <div className="flex justify-center gap-6 mb-8">
+          <Icono 
+            link="https://github.com/neferMR" 
+            icono="icon-github text-2xl hover:text-blue-400 transition-colors duration-300"
+          />
+          <Icono 
+            link="https://www.linkedin.com/in/nefer-medina/" 
+            icono="icon-linkedin2 text-2xl hover:text-blue-400 transition-colors duration-300"
+          />
+          <Icono 
+            link="mailto:nefermr5@gmail.com" 
+            icono="icon-earth text-2xl hover:text-blue-400 transition-colors duration-300"
+          />
+        </div>
+        
+        <div className="border-t border-gray-600 pt-6">
+          <p className="text-gray-400 text-sm">
+            © {new Date().getFullYear()} Nefer Medina. Todos los derechos reservados.
+          </p>
         </div>
       </div>
-    );
-  }
-
-  function techItem(tech, link) {
-    return (
-      <div className="flex justify-between items-center bg-[#f5f5f5] p-3 rounded-lg">
-        <span className="font-bold text-[#274059]">{tech}</span>
-        <button className="bg-[#416e9b] text-white border-none py-2 px-4 rounded-lg cursor-pointer transition-colors duration-300 ease-in-out hover:bg-[#5a8ab8]">
-          <a href={link}>Ir</a>
-        </button>
-      </div>
-    );
-  }
-
-  return isModalOpen ? modal() : footerText();
+    </footer>
+  );
 }
 
 export default Footer;

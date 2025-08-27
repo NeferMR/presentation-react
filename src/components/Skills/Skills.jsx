@@ -21,9 +21,11 @@ function Skills() {
   }, []);
 
   return (
-    <section className="bg-[#f5f5f5] p-4 text-center font-mono lg:py-4 lg:px-20 xl:py-4 xl:px-60">
-      <h2 className="text-5xl font-bold mt-20 mb-4">Habilidades</h2>
-      <div className="flex justify-center gap-32 flex-wrap p-8">
+    <section id="skills" className="bg-[#f5f5f5] dark:bg-gray-700 p-4 sm:p-6 md:p-8 text-center font-mono lg:py-12 lg:px-20 xl:py-16 xl:px-60">
+      <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-12 mb-8 sm:mt-20 sm:mb-12 text-[#274059] dark:text-white">
+        Habilidades
+      </h2>
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-8 justify-items-center max-w-6xl mx-auto">
         {Skillitem({ percentage: "90", name: "HTML-CSS-JS" })}
         {Skillitem({ percentage: "90", name: "Python" })}
         {Skillitem({ percentage: "85", name: "React" })}
@@ -39,18 +41,22 @@ function Skills() {
 
 function Skillitem({ percentage, name }) {
   return (
-    <div className="w-36 h-36 relative">
+    <div className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 relative group">
       <div
-        className="skill-circle w-full h-full rounded-full flex items-center justify-center relative before:content-[''] before:absolute before:w-[90%] before:h-[90%] before:rounded-full before:bg-[#f5f5f5]"
+        className="skill-circle w-full h-full rounded-full flex items-center justify-center relative before:content-[''] before:absolute before:w-[90%] before:h-[90%] before:rounded-full before:bg-[#f5f5f5] dark:before:bg-gray-700 transition-transform duration-300 group-hover:scale-105"
         style={{
-          background: `conic-gradient(#274059 0% var(--percentage), #e0e0e0 var(--percentage) 100%)`,
+          background: `conic-gradient(var(--skill-progress-color, #274059) 0% var(--percentage), var(--skill-bg-color, #e0e0e0) var(--percentage) 100%)`,
+          '--skill-progress-color': '#274059',
+          '--skill-bg-color': '#e0e0e0',
         }}
       >
-        <div className="relative z-10 flex flex-col items-center justify-center">
-          <span className="skill-percentage text-2xl font-bold text-[#274059]">
+        <div className="relative z-10 flex flex-col items-center justify-center px-2">
+          <span className="skill-percentage text-lg sm:text-xl md:text-2xl font-bold text-[#274059] dark:text-white mb-1">
             {percentage}%
           </span>
-          <span className="text-base text-[#274059] text-center">{name}</span>
+          <span className="text-xs sm:text-sm text-[#274059] dark:text-white text-center leading-tight">
+            {name}
+          </span>
         </div>
       </div>
     </div>

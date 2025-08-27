@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Inter:wght@300;400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -29,7 +30,7 @@
   /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}¨
+}
 
 * {
   margin: 0;
@@ -60,4 +61,10 @@
 }
 .icon-linkedin2:before {
   content: "\eaca";
+}
+
+/* Estilos para los círculos de habilidades en modo oscuro */
+.dark .skill-circle {
+  --skill-progress-color: #60a5fa !important;
+  --skill-bg-color: #374151 !important;
 }

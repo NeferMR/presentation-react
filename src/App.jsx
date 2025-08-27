@@ -1,5 +1,5 @@
-import { useState } from 'react'
-
+import React from 'react'
+import { ThemeProvider } from './contexts/ThemeContext'
 import Header from './components/Header/Header'
 import About from './components/About/About'
 import Resumen from './components/Resumen/Resumen'
@@ -8,20 +8,39 @@ import Skills from './components/Skills/Skills'
 import Projects from './components/Projects/Projects'
 import Contacto from './components/Contacto/Contacto'
 import Footer from './components/Footer/Footer'
+import ScrollToTop from './components/ScrollToTop/ScrollToTop'
+import ThemeToggle from './components/ThemeToggle/ThemeToggle'
+import ScrollReveal from './components/ScrollReveal/ScrollReveal'
 import './App.css'
 
 function App() {
   return (
-    <>
-      <Header />
-      <About />
-      <Resumen />
-      <Servicios />
-      <Skills />
-      <Projects />
-      <Contacto />
-      <Footer />
-    </>
+    <ThemeProvider>
+      <div className="dark:bg-gray-900 transition-colors duration-300">
+        <ThemeToggle />
+        <Header />
+        <ScrollReveal direction="up" delay={100}>
+          <About />
+        </ScrollReveal>
+        <ScrollReveal direction="up" delay={200}>
+          <Resumen />
+        </ScrollReveal>
+        <ScrollReveal direction="left" delay={100}>
+          <Servicios />
+        </ScrollReveal>
+        <ScrollReveal direction="scale" delay={150}>
+          <Skills />
+        </ScrollReveal>
+        <ScrollReveal direction="up" delay={100}>
+          <Projects />
+        </ScrollReveal>
+        <ScrollReveal direction="fade" delay={100}>
+          <Contacto />
+        </ScrollReveal>
+        <Footer />
+        <ScrollToTop />
+      </div>
+    </ThemeProvider>
   )
 }
 

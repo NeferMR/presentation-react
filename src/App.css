@@ -1,0 +1,45 @@
+/* Estilos globales para mejorar la experiencia del usuario */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+}
+
+/* Utilidad para truncar texto en múltiples líneas */
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Mejoras en las transiciones */
+* {
+  transition: color 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Mejoras en el focus para accesibilidad */
+button:focus,
+input:focus,
+textarea:focus,
+select:focus,
+a:focus {
+  outline: 2px solid #274059;
+  outline-offset: 2px;
+}
+
+/* Mejoras en los hover states */
+button:hover,
+.cursor-pointer:hover {
+  transform: translateY(-2px);
+}
+
+/* Responsividad para imágenes */
+img {
+  max-width: 100%;
+  height: auto;
+}
