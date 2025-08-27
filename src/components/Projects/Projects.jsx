@@ -16,6 +16,10 @@ export default function Projects() {
   // Estados para el carousel de imágenes
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const imageIntervalRef = useRef(null);
+  
+  // Estado para el modal de pantalla completa
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [fullscreenImageSrc, setFullscreenImageSrc] = useState('');
 
   useEffect(() => {
     async function fetchProjects() {
@@ -138,6 +142,41 @@ export default function Projects() {
       clearImageTimer();
     };
   }, [isOpen, selectedProject, startImageTimer, clearImageTimer]);
+
+  // Funciones para el modal de pantalla completa
+  const openFullscreen = useCallback((imageSrc) => {
+    setFullscreenImageSrc(imageSrc);
+    setIsFullscreen(true);
+    // Pausar el carousel cuando se abre pantalla completa
+    clearImageTimer();
+  }, [clearImageTimer]);
+
+  const closeFullscreen = useCallback(() => {
+    setIsFullscreen(false);
+    setFullscreenImageSrc('');
+    // Reanudar el carousel si el modal principal está abierto
+    if (isOpen && selectedProject) {
+      const images = getProjectImages(selectedProject);
+      startImageTimer(images);
+    }
+  }, [isOpen, selectedProject, startImageTimer]);
+
+  // Effect para manejar tecla Escape en pantalla completa
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape' && isFullscreen) {
+        closeFullscreen();
+      }
+    };
+
+    if (isFullscreen) {
+      document.addEventListener('keydown', handleKeyDown);
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isFullscreen, closeFullscreen]);
 
   return (
     <section className="relative bg-gray-50 dark:bg-gray-800 py-10 px-4 sm:px-6 md:px-8 overflow-hidden" id="projects">
@@ -296,11 +335,19 @@ export default function Projects() {
                       <img
                         src={images[currentImageIndex]}
                         alt={`${selectedProject.Nombre} - Imagen ${currentImageIndex + 1}`}
-                        className="max-w-full max-h-full object-contain rounded-md shadow-md border border-gray-200/50 dark:border-gray-500/50"
+                        className="max-w-full max-h-full object-contain rounded-md shadow-md border border-gray-200/50 dark:border-gray-500/50 cursor-pointer hover:opacity-90 transition-opacity duration-200"
+                        onClick={() => openFullscreen(images[currentImageIndex])}
                         onError={(e) => {
                           e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgSGVsdmV0aWNhLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiBmaWxsPSIjOTk5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+SW1hZ2VuIG5vIGRpc3BvbmlibGU8L3RleHQ+PC9zdmc+';
                         }}
+                        title="Clic para ver en pantalla completa"
                       />
+                      {/* Indicador de pantalla completa */}
+                      <div className="absolute top-2 right-2 bg-black bg-opacity-50 text-white rounded-full w-8 h-8 flex items-center justify-center opacity-70 hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M3 4a1 1 0 011-1h3a1 1 0 010 2H6.414l2.293 2.293a1 1 0 11-1.414 1.414L5 6.414V8a1 1 0 01-2 0V4zM16 4a1 1 0 00-1-1h-3a1 1 0 100 2h1.586l-2.293 2.293a1 1 0 001.414 1.414L15 6.414V8a1 1 0 102 0V4zM4 15a1 1 0 001 1h3a1 1 0 100-2H6.414l2.293-2.293a1 1 0 00-1.414-1.414L5 12.586V11a1 1 0 10-2 0v4zM15 15a1 1 0 01-1 1h-3a1 1 0 110-2h1.586l-2.293-2.293a1 1 0 111.414-1.414L13 12.586V11a1 1 0 112 0v4z"/>
+                        </svg>
+                      </div>
                     </div>
                     {/* Overlay para botones si hay más de una imagen */}
                     {images.length > 1 && (
@@ -357,6 +404,44 @@ export default function Projects() {
                 </div>
               );
             })()}
+          </div>
+        </div>,
+        document.body
+      )}
+      
+      {/* Modal de pantalla completa */}
+      {isFullscreen && createPortal(
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-95 flex items-center justify-center z-[9999] p-4"
+          onClick={closeFullscreen}
+        >
+          <div className="relative w-full h-full flex items-center justify-center">
+            {/* Botón cerrar */}
+            <button
+              onClick={closeFullscreen}
+              className="absolute top-4 right-4 text-white hover:text-gray-300 text-3xl font-bold w-10 h-10 flex items-center justify-center z-10 bg-black bg-opacity-50 rounded-full transition-colors duration-200"
+              aria-label="Cerrar pantalla completa"
+            >
+              ×
+            </button>
+            
+            {/* Contenedor con tamaño fijo para normalizar las imágenes */}
+            <div className="w-full h-full max-w-6xl max-h-[80vh] flex items-center justify-center p-8">
+              <img
+                src={fullscreenImageSrc}
+                alt="Imagen en pantalla completa"
+                className="w-full h-full object-contain"
+                onClick={(e) => e.stopPropagation()}
+                onError={(e) => {
+                  e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgSGVsdmV0aWNhLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiBmaWxsPSIjOTk5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+SW1hZ2VuIG5vIGRpc3BvbmlibGU8L3RleHQ+PC9zdmc+';
+                }}
+              />
+            </div>
+            
+            {/* Instrucciones */}
+            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-white text-sm bg-black bg-opacity-50 px-3 py-1 rounded">
+              Presiona ESC o haz clic para cerrar
+            </div>
           </div>
         </div>,
         document.body
