@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { createPortal } from "react-dom";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 import { supabase } from "../../utils/supabase/client";
@@ -15,7 +15,7 @@ export default function Projects() {
   
   // Estados para el carousel de imágenes
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [imageInterval, setImageInterval] = useState(null);
+  const imageIntervalRef = useRef(null);
 
   useEffect(() => {
     async function fetchProjects() {
@@ -43,7 +43,6 @@ export default function Projects() {
 
   }, []);
 
-    console.log(projects);
   useEffect(() => {
     // Adaptar datos de Supabase: convertir strings separadas por comas a arrays
     const allTechs = projects.flatMap((item) => 
@@ -79,9 +78,9 @@ export default function Projects() {
     setSelectedProject(null);
     setCurrentImageIndex(0);
     // Limpiar interval si existe
-    if (imageInterval) {
-      clearInterval(imageInterval);
-      setImageInterval(null);
+    if (imageIntervalRef.current) {
+      clearInterval(imageIntervalRef.current);
+      imageIntervalRef.current = null;
     }
     // Restaurar scroll del body
     document.body.style.overflow = 'unset';
@@ -93,50 +92,52 @@ export default function Projects() {
     return project.Imagen.split(',').map(img => img.trim()).filter(img => img);
   };
 
-  const resetImageTimer = useCallback((images) => {
-    // Limpiar interval existente
-    if (imageInterval) {
-      clearInterval(imageInterval);
+  const clearImageTimer = useCallback(() => {
+    if (imageIntervalRef.current) {
+      clearInterval(imageIntervalRef.current);
+      imageIntervalRef.current = null;
     }
+  }, []);
+
+  const startImageTimer = useCallback((images) => {
+    // Limpiar cualquier timer existente
+    clearImageTimer();
     
     // Solo crear nuevo interval si hay más de una imagen
     if (images.length > 1) {
-      const newInterval = setInterval(() => {
+      imageIntervalRef.current = setInterval(() => {
         setCurrentImageIndex((prevIndex) => 
           prevIndex === images.length - 1 ? 0 : prevIndex + 1
         );
       }, 10000); // 10 segundos
-      setImageInterval(newInterval);
     }
-  }, [imageInterval]);
+  }, [clearImageTimer]);
 
   const nextImage = useCallback((images) => {
     setCurrentImageIndex((prevIndex) => 
       prevIndex === images.length - 1 ? 0 : prevIndex + 1
     );
-    resetImageTimer(images);
-  }, [resetImageTimer]);
+    startImageTimer(images);
+  }, [startImageTimer]);
 
   const prevImage = useCallback((images) => {
     setCurrentImageIndex((prevIndex) => 
       prevIndex === 0 ? images.length - 1 : prevIndex - 1
     );
-    resetImageTimer(images);
-  }, [resetImageTimer]);
+    startImageTimer(images);
+  }, [startImageTimer]);
 
   // Effect para iniciar el timer cuando se abre el modal
   useEffect(() => {
     if (isOpen && selectedProject) {
       const images = getProjectImages(selectedProject);
-      resetImageTimer(images);
+      startImageTimer(images);
     }
     
     return () => {
-      if (imageInterval) {
-        clearInterval(imageInterval);
-      }
+      clearImageTimer();
     };
-  }, [isOpen, selectedProject, imageInterval, resetImageTimer]);
+  }, [isOpen, selectedProject, startImageTimer, clearImageTimer]);
 
   return (
     <section className="relative bg-gray-50 dark:bg-gray-800 py-10 px-4 sm:px-6 md:px-8 overflow-hidden" id="projects">
@@ -198,10 +199,29 @@ export default function Projects() {
                 onClick={() => openModal(proj)}
                 className="cursor-pointer bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 hover:shadow-xl transition-all duration-300 transform hover:scale-105"
               >
-                {/* Placeholder para imagen cuando la añadas */}
-                <div className="rounded-lg mb-4 w-full h-40 sm:h-48 bg-gray-200 dark:bg-gray-600 flex items-center justify-center">
-                  <span className="text-gray-500 dark:text-gray-400 text-sm">Sin imagen</span>
-                </div>
+                {/* Imagen preview (primera imagen del proyecto) */}
+                {(() => {
+                  const images = getProjectImages(proj);
+                  if (images.length > 0) {
+                    return (
+                      <div className="rounded-lg mb-4 w-full h-40 sm:h-48 bg-gray-200 dark:bg-gray-600 overflow-hidden">
+                        <img
+                          src={images[0]}
+                          alt={`Preview de ${proj.Nombre}`}
+                          className="w-full h-full object-cover"
+                          onError={(e) => {
+                            e.target.parentElement.innerHTML = '<div class="w-full h-full flex items-center justify-center"><span class="text-gray-500 dark:text-gray-400 text-sm">Imagen no disponible</span></div>';
+                          }}
+                        />
+                      </div>
+                    );
+                  }
+                  return (
+                    <div className="rounded-lg mb-4 w-full h-40 sm:h-48 bg-gray-200 dark:bg-gray-600 flex items-center justify-center">
+                      <span className="text-gray-500 dark:text-gray-400 text-sm">Sin imagen</span>
+                    </div>
+                  );
+                })()}
                 <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-white">{proj.Nombre}</h3>
                 <p className="text-gray-600 dark:text-gray-300 mb-3 text-sm line-clamp-3">{proj.Descripcion}</p>
                 <div className="flex flex-wrap gap-1 mb-3">
@@ -269,17 +289,19 @@ export default function Projects() {
               
               return (
                 <div className="mt-4 relative">
-                  {/* Imagen principal */}
-                  <div className="relative w-full h-40 sm:h-48 bg-gray-200 dark:bg-gray-600 rounded overflow-hidden">
-                    <img
-                      src={images[currentImageIndex]}
-                      alt={`${selectedProject.Nombre} - Imagen ${currentImageIndex + 1}`}
-                      className="w-full h-full object-cover"
-                      onError={(e) => {
-                        e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgSGVsdmV0aWNhLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiBmaWxsPSIjOTk5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+SW1hZ2VuIG5vIGRpc3BvbmlibGU8L3RleHQ+PC9zdmc+';
-                      }}
-                    />
-                    
+                  {/* Imagen principal con formato definido */}
+                  <div className="relative w-full bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-800 rounded-lg overflow-hidden border-2 border-gray-200 dark:border-gray-600 shadow-lg">
+                    {/* Contenedor con aspect ratio 16:10 para formato panorámico */}
+                    <div className="aspect-[16/10] flex items-center justify-center p-3">
+                      <img
+                        src={images[currentImageIndex]}
+                        alt={`${selectedProject.Nombre} - Imagen ${currentImageIndex + 1}`}
+                        className="max-w-full max-h-full object-contain rounded-md shadow-md border border-gray-200/50 dark:border-gray-500/50"
+                        onError={(e) => {
+                          e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgSGVsdmV0aWNhLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiBmaWxsPSIjOTk5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+SW1hZ2VuIG5vIGRpc3BvbmlibGU8L3RleHQ+PC9zdmc+';
+                        }}
+                      />
+                    </div>
                     {/* Overlay para botones si hay más de una imagen */}
                     {images.length > 1 && (
                       <>
@@ -308,7 +330,8 @@ export default function Projects() {
                               key={index}
                               onClick={() => {
                                 setCurrentImageIndex(index);
-                                resetImageTimer(images);
+                                clearImageTimer();
+                                startImageTimer(images);
                               }}
                               className={`w-2 h-2 rounded-full transition-all duration-200 ${
                                 index === currentImageIndex 
