@@ -37,8 +37,16 @@ export default function Projects() {
   };
 
   return (
-    <section className="bg-[#416e9b] dark:bg-gray-900 py-10 px-4 sm:px-6 md:px-8" id="projects">
-      <h2 className="text-center text-3xl sm:text-4xl md:text-5xl font-bold my-12 sm:my-16 text-white">
+    <section className="relative bg-gray-50 dark:bg-gray-800 py-10 px-4 sm:px-6 md:px-8 overflow-hidden" id="projects">
+      {/* Elementos decorativos de fondo */}
+      <div className="absolute inset-0 opacity-3 dark:opacity-5">
+        <div className="absolute top-20 left-10 w-40 h-40 bg-blue-300 rounded-full mix-blend-multiply filter blur-2xl animate-blob" />
+        <div className="absolute top-40 right-10 w-40 h-40 bg-purple-300 rounded-full mix-blend-multiply filter blur-2xl animate-blob animation-delay-2000" />
+        <div className="absolute bottom-20 left-20 w-40 h-40 bg-pink-300 rounded-full mix-blend-multiply filter blur-2xl animate-blob animation-delay-4000" />
+      </div>
+      
+      <div className="relative z-10">
+      <h2 className="text-center text-3xl sm:text-4xl md:text-5xl font-bold my-12 sm:my-16 text-gray-900 dark:text-white">
         Proyectos
       </h2>
       <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-8 max-w-4xl mx-auto">
@@ -69,7 +77,7 @@ export default function Projects() {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
         {projects.length === 0 ? (
-          <div className="sm:col-span-2 lg:col-span-3">
+          <div className="col-span-1 sm:col-span-2 lg:col-span-3 flex justify-center items-center min-h-[300px]">
             <LoadingSpinner />
           </div>
         ) : (
@@ -159,6 +167,7 @@ export default function Projects() {
             </div>
           </div>
         )}
+      </div>
       </div>
     </section>
   );

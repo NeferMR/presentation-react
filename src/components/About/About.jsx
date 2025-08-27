@@ -4,7 +4,7 @@ import Icono from "../Icono/Icono";
 
 function About() {
   return (
-    <section id="about" className="bg-white dark:bg-gray-800 p-4 sm:p-6 md:p-8 shadow-lg font-mono lg:py-12 lg:px-20 xl:py-16 xl:px-60">
+    <section id="about" className="bg-white dark:bg-gray-800 p-4 sm:p-6 md:p-8 shadow-lg lg:py-12 lg:px-20 xl:py-16 xl:px-60">
       <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center my-12 sm:my-16 md:my-24 text-[#274059] dark:text-white">
         Sobre mí
       </h2>

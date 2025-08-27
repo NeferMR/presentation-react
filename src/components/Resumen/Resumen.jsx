@@ -3,7 +3,15 @@ import "./Resumen.css";
 
 function Resumen() {
   return (
-    <section id="resumen" className="p-4 sm:p-6 md:p-8 shadow-lg font-mono bg-white dark:bg-gray-800">
+    <section className="relative bg-gray-50 dark:bg-gray-800 py-12 px-4 sm:px-6 md:px-8 overflow-hidden" id="resumen">
+      {/* Elementos decorativos de fondo */}
+      <div className="absolute inset-0 opacity-3 dark:opacity-5">
+        <div className="absolute top-20 left-10 w-40 h-40 bg-blue-300 rounded-full mix-blend-multiply filter blur-2xl animate-blob" />
+        <div className="absolute top-40 right-10 w-40 h-40 bg-purple-300 rounded-full mix-blend-multiply filter blur-2xl animate-blob animation-delay-2000" />
+        <div className="absolute bottom-20 left-20 w-40 h-40 bg-pink-300 rounded-full mix-blend-multiply filter blur-2xl animate-blob animation-delay-4000" />
+      </div>
+      
+      <div className="relative z-10 max-w-6xl mx-auto">
       <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-12 mb-8 sm:mt-20 sm:mb-12 text-[#274059] dark:text-white text-center">
         Resumen
       </h2>
@@ -31,6 +39,7 @@ function Resumen() {
             "Periodo universitario donde aprendí muchísimas cosas tanto personal como profesionalmente, ya que, aparte de aprender cosas tan básicas como la programación, algoritmia, bases de datos, etc., hasta teorías y técnicas más complejas como las metodologías de trabajo, la gestión de equipos, la eficiencia y eficacia de procesos, la comunicación efectiva con el cliente, etc. También aprendí muchas otras cosas como el correcto trabajo en equipo, la importancia de la comunicación, la importancia de la resolución de problemas, la investigación, los tiempos de respuesta, etc."
           )}
         </ul>
+      </div>
       </div>
     </section>
   );

@@ -2,6 +2,7 @@ import React from 'react'
 import { ThemeProvider } from './contexts/ThemeContext'
 import Header from './components/Header/Header'
 import About from './components/About/About'
+import Fortalezas from './components/Fortalezas/Fortalezas'
 import Resumen from './components/Resumen/Resumen'
 import Servicios from './components/Servicios/Servicios'
 import Skills from './components/Skills/Skills'
@@ -21,6 +22,9 @@ function App() {
         <Header />
         <ScrollReveal direction="up" delay={100}>
           <About />
+        </ScrollReveal>
+        <ScrollReveal direction="fade" delay={150}>
+          <Fortalezas />
         </ScrollReveal>
         <ScrollReveal direction="up" delay={200}>
           <Resumen />

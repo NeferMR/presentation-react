@@ -7,6 +7,10 @@ export default {
   darkMode: 'class',
   theme: {
     extend: {
+      fontFamily: {
+        'sans': ['Inter', 'system-ui', 'sans-serif'],
+        'script': ['Kaushan Script', 'cursive'],
+      },
       animation: {
         'pulse-slow': 'pulse 2s infinite',
         'bounce-slow': 'bounce 2s infinite',

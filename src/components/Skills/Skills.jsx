@@ -21,7 +21,15 @@ function Skills() {
   }, []);
 
   return (
-    <section id="skills" className="bg-[#f5f5f5] dark:bg-gray-700 p-4 sm:p-6 md:p-8 text-center font-mono lg:py-12 lg:px-20 xl:py-16 xl:px-60">
+    <section id="skills" className="relative bg-gray-50 dark:bg-gray-800 p-4 sm:p-6 md:p-8 text-center lg:py-12 lg:px-20 xl:py-16 xl:px-60 overflow-hidden">
+      {/* Elementos decorativos de fondo */}
+      <div className="absolute inset-0 opacity-3 dark:opacity-5">
+        <div className="absolute top-16 left-8 w-40 h-40 bg-blue-300 rounded-full mix-blend-multiply filter blur-2xl animate-blob" />
+        <div className="absolute top-32 right-12 w-40 h-40 bg-purple-300 rounded-full mix-blend-multiply filter blur-2xl animate-blob animation-delay-2000" />
+        <div className="absolute bottom-16 left-16 w-40 h-40 bg-pink-300 rounded-full mix-blend-multiply filter blur-2xl animate-blob animation-delay-4000" />
+      </div>
+      
+      <div className="relative z-10">
       <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-12 mb-8 sm:mt-20 sm:mb-12 text-[#274059] dark:text-white">
         Habilidades
       </h2>
@@ -34,6 +42,7 @@ function Skills() {
         {Skillitem({ percentage: "85", name: "SQL" })}
         {Skillitem({ percentage: "95", name: "Git - Github" })}
         {Skillitem({ percentage: "70", name: "Cloud" })}
+      </div>
       </div>
     </section>
   );

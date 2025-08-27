@@ -22,6 +22,7 @@ function Header() {
           <ul className="flex gap-8 text-sm font-medium">
             <li><button onClick={() => scrollToSection('inicio')} className="hover:text-blue-300 transition-colors">Inicio</button></li>
             <li><button onClick={() => scrollToSection('about')} className="hover:text-blue-300 transition-colors">Sobre mí</button></li>
+            <li><button onClick={() => scrollToSection('fortalezas')} className="hover:text-blue-300 transition-colors">Fortalezas</button></li>
             <li><button onClick={() => scrollToSection('resumen')} className="hover:text-blue-300 transition-colors">Resumen</button></li>
             <li><button onClick={() => scrollToSection('servicios')} className="hover:text-blue-300 transition-colors">Servicios</button></li>
             <li><button onClick={() => scrollToSection('skills')} className="hover:text-blue-300 transition-colors">Habilidades</button></li>
@@ -37,7 +38,7 @@ function Header() {
           alt="Foto de perfil de Nefer Medina" 
           className="w-40 h-40 sm:w-48 sm:h-48 md:w-52 md:h-52 rounded-full object-cover mx-auto mb-6 border-4 border-white/20 shadow-2xl" 
         />
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-normal my-4 -rotate-12 font-['Kaushan_Script'] text-white relative">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-normal my-4 -rotate-12 font-script text-white relative">
           Nefer Medina
         </h1>
         <h3 className="font-normal mt-4 text-sm sm:text-base md:text-lg text-gray-200 mb-6 min-h-[2rem]">
